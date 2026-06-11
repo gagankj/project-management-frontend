@@ -49,11 +49,20 @@ The application provides secure authentication and authorization, ensuring that 
 
 # Local Setup
 
-## Clone Repository
+# Clone Repositories
+
+## Clone Frontend Repository
 
 ```bash
 git clone https://github.com/gagankj/project-management-frontend.git
 ```
+
+## Clone Backend Repository
+
+```bash
+git clone https://github.com/gagankj/project-management-server.git
+```
+
 
 ## Install Dependencies
 
