@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Hide browser-native password reveal and input clear buttons */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none !important;
+}
