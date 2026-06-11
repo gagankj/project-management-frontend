@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { ProjectInput } from '../schemas/project';
 import { projectSchema } from '../schemas/project';
-import {  Plus, X, Calendar, User, Users, CheckSquare, Loader2, Tag, Search, Pencil, Trash } from 'lucide-react';
+import {  Plus, Calendar, User, Users, CheckSquare, Loader2, Tag, Search, Pencil, Trash } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import toast from 'react-hot-toast';

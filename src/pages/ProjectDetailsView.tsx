@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { TaskInput, ProjectInput } from '../schemas/project';
 import { taskSchema, projectSchema } from '../schemas/project';
-import { ArrowLeft, Plus, Users, Calendar, CheckSquare, X, Loader2, User, HelpCircle, ShieldCheck, Pencil, Trash, Search, Tag } from 'lucide-react';
+import { ArrowLeft, Plus, Calendar, Loader2, User,  ShieldCheck, Pencil, Trash, Search, Tag } from 'lucide-react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 import ConfirmationModal from '../components/ConfirmationModal';
