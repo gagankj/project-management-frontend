@@ -83,12 +83,14 @@ PORT=5000
 MONGODB_URI=your_mongodb_uri
 
 JWT_SECRET=your_jwt_secret
+
+CLIENT_ORIGIN = http://localhost:5173
 ```
 
 ### Frontend Environment Variables
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:5000/api
 ```
 
 ## Database Setup
