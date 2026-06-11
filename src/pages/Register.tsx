@@ -186,7 +186,7 @@ export const Register: React.FC = () => {
             Already have an account?{' '}
             <Link
               to="/login"
-              className="font-semibold text-indigo-650 hover:text-indigo-550 transition-colors duration-150 underline decoration-indigo-600/30 underline-offset-4"
+              className="font-semibold text-indigo-600 hover:text-indigo-700 transition-colors duration-150 underline decoration-indigo-600/30 underline-offset-4"
             >
               Sign In
             </Link>

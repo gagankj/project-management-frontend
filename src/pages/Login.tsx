@@ -138,7 +138,7 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             Don't have an account?{' '}
             <Link
               to="/register"
-              className="font-semibold text-indigo-650 hover:text-indigo-550 transition-colors duration-150 underline decoration-indigo-600/30 underline-offset-4"
+              className="font-semibold text-indigo-600 hover:text-indigo-700 transition-colors duration-150 underline decoration-indigo-600/30 underline-offset-4"
             >
               Sign Up
             </Link>

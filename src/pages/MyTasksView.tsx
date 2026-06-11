@@ -90,83 +90,151 @@ export const MyTasksView: React.FC = () => {
       </div>
 
       {tasks.length === 0 ? (
-        <div className="text-center py-16 border  border-zinc-200 rounded-2xl bg-white">
-          
-          <h3 className="text-lg font-semibold text-slate-705 text-slate-700">No tasks are assigned to you.</h3>
-          
+        <div className="text-center py-16 border border-zinc-200 rounded-2xl bg-white">
+          <h3 className="text-lg font-semibold text-slate-700">No tasks are assigned to you.</h3>
         </div>
       ) : (
-        <div className="bg-white border border-slate-205 rounded-2xl overflow-hidden shadow-sm">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                  <th className="py-4 px-6">Task Details</th>
-                  <th className="py-4 px-6">Project Name</th>
-                  <th className="py-4 px-6">Deadline</th>
-                  <th className="py-4 px-6 text-right">Status Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200 text-sm text-slate-800">
-                {tasks.map((task) => (
-                  <tr key={task._id} className="hover:bg-slate-50/50 transition-colors">
-                    
-                    <td className="py-4 px-6 font-semibold text-slate-900 max-w-xs truncate">
-                      {task.name}
-                    </td>
+        <>
+          {/* Mobile Card List View (visible on < md screens) */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {tasks.map((task) => (
+              <div 
+                key={task._id} 
+                className="bg-white border border-zinc-200 rounded-2xl p-5 space-y-4   duration-200"
+              >
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    Task Name
+                  </span>
+                  <h4 className="font-bold text-slate-900 text-base leading-snug">
+                    {task.name}
+                  </h4>
+                </div>
 
-                    
-                    <td className="py-4 px-6">
-                      <div className="flex flex-col">
-                        <span className="font-medium text-slate-700 truncate">
-                          {task.project?.name || 'Unlinked Project'}
-                        </span>
-                        <span className="text-[10px] text-slate-500">
-                          Category: {task.project?.category || 'None'}
-                        </span>
-                      </div>
-                    </td>
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    Project
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-slate-700 text-sm">
+                      {task.project?.name || 'Unlinked Project'}
+                    </span>
+                    <span className="text-[10px] text-slate-500">
+                      Category: {task.project?.category || 'None'}
+                    </span>
+                  </div>
+                </div>
 
-                    
-                    <td className="py-4 px-6 text-slate-550 text-xs">
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5 text-slate-400" />
-                        <span>
-                          {new Date(task.deadline).toLocaleDateString(undefined, {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })}
-                        </span>
-                      </div>
-                    </td>
+                <div className="flex justify-between items-center pt-3 border-t border-slate-100 gap-4 flex-wrap">
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      Deadline
+                    </span>
+                    <div className="flex items-center gap-1.5 text-xs text-slate-650 font-medium">
+                      <Calendar className="h-3.5 w-3.5 text-slate-400" />
+                      <span>
+                        {new Date(task.deadline).toLocaleDateString(undefined, {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric',
+                        })}
+                      </span>
+                    </div>
+                  </div>
 
-                    
-                    <td className="py-4 px-6 text-right">
-                      <div className="inline-flex items-center gap-2">
-                        {updatingTaskId === task._id && (
-                          <Loader2 className="h-3.5 w-3.5 animate-spin text-indigo-600" />
-                        )}
-                        <select
-                          disabled={updatingTaskId === task._id}
-                          value={task.status}
-                          onChange={(e) => handleStatusChange(task._id, e.target.value)}
-                          className={`border text-[11px] font-bold rounded-lg px-2.5 py-1.5 outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer ${getStatusBadgeStyles(
-                            task.status
-                          )}`}
-                        >
-                          <option value="pending" className="text-slate-800 font-medium bg-white">Pending</option>
-                          <option value="in progress" className="text-slate-800 font-medium bg-white">In Progress</option>
-                          <option value="completed" className="text-slate-800 font-medium bg-white">Completed</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 self-end">
+                      Status Action
+                    </span>
+                    <div className="inline-flex items-center gap-1.5">
+                      {updatingTaskId === task._id && (
+                        <Loader2 className="h-3.5 w-3.5 animate-spin text-indigo-650" />
+                      )}
+                      <select
+                        disabled={updatingTaskId === task._id}
+                        value={task.status}
+                        onChange={(e) => handleStatusChange(task._id, e.target.value)}
+                        className={`border text-[11px] font-bold rounded-lg px-2.5 py-1.5 outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer ${getStatusBadgeStyles(
+                          task.status
+                        )}`}
+                      >
+                        <option value="pending" className="text-slate-800 font-medium bg-white">Pending</option>
+                        <option value="in progress" className="text-slate-800 font-medium bg-white">In Progress</option>
+                        <option value="completed" className="text-slate-800 font-medium bg-white">Completed</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
+
+          {/* Desktop Table View (visible on >= md screens) */}
+          <div className="hidden md:block bg-white border border-zinc-200 rounded-2xl overflow-hidden ">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-zinc-300 bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    <th className="py-4 px-6">Task Details</th>
+                    <th className="py-4 px-6">Project Name</th>
+                    <th className="py-4 px-6">Deadline</th>
+                    <th className="py-4 px-6 text-right">Status Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 text-sm text-slate-800">
+                  {tasks.map((task) => (
+                    <tr key={task._id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="py-4 px-6 font-semibold text-slate-900 max-w-xs truncate">
+                        {task.name}
+                      </td>
+                      <td className="py-4 px-6">
+                        <div className="flex flex-col">
+                          <span className="font-medium text-slate-700 truncate">
+                            {task.project?.name || 'Unlinked Project'}
+                          </span>
+                          <span className="text-[10px] text-slate-500">
+                            Category: {task.project?.category || 'None'}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 text-slate-550 text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="h-3.5 w-3.5 text-slate-400" />
+                          <span>
+                            {new Date(task.deadline).toLocaleDateString(undefined, {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 text-right">
+                        <div className="inline-flex items-center gap-2">
+                          {updatingTaskId === task._id && (
+                            <Loader2 className="h-3.5 w-3.5 animate-spin text-indigo-650" />
+                          )}
+                          <select
+                            disabled={updatingTaskId === task._id}
+                            value={task.status}
+                            onChange={(e) => handleStatusChange(task._id, e.target.value)}
+                            className={`border text-[11px] font-bold rounded-lg px-2.5 py-1.5 outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer ${getStatusBadgeStyles(
+                              task.status
+                            )}`}
+                          >
+                            <option value="pending" className="text-slate-800 font-medium bg-white">Pending</option>
+                            <option value="in progress" className="text-slate-800 font-medium bg-white">In Progress</option>
+                            <option value="completed" className="text-slate-800 font-medium bg-white">Completed</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

@@ -208,7 +208,7 @@ export const ProjectsView: React.FC = () => {
             <Link
               key={project._id}
               to={`/dashboard/projects/${project._id}`}
-              className="block group bg-white hover:bg-slate-50/50 border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200"
+              className="block group bg-white hover:border-zinc-400 border border-zinc-200 rounded-2xl p-6  transition-all duration-200"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="space-y-2 flex-1 min-w-0">
