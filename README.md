@@ -52,7 +52,7 @@ The application provides secure authentication and authorization, ensuring that 
 ## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/gagankj/project-management-frontend.git
 ```
 
 ## Install Dependencies
